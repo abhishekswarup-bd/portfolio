@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Pro - AI Patient Education Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #06060e;
+            --bg-card: rgba(15, 15, 30, 0.8);
+            --accent-cyan: #00f0ff;
+            --accent-cyan-dark: #00d4e0;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c0;
+            --border-color: rgba(0, 240, 255, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scan-line overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Fixed Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(6, 6, 14, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), #00d4e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            filter: drop-shadow(0 0 10px var(--accent-cyan));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.05) 0%, rgba(6, 6, 14, 0) 100%);
+            border-bottom: 1px solid var(--border-color);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), #00d4e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), #00d4e0);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+            font-family: 'Inter', sans-serif;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Screenshot Section */
+        .screenshot-section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .browser-frame {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .browser-header {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .browser-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .browser-url {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-left: auto;
+        }
+
+        .browser-content {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        .browser-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+        }
+
+        .browser-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 10;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .browser-overlay:hover {
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            font-size: 1.1rem;
+        }
+
+        .browser-overlay:hover .overlay-text {
+            opacity: 1;
+        }
+
+        /* Challenge Section */
+        .challenge-section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .challenge-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .challenge-section h2::before {
+            content: 'â ï¸';
+            font-size: 1.8rem;
+        }
+
+        .challenge-text {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-left: 3px solid var(--accent-cyan);
+            border-radius: 8px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* Features Grid */
+        .features-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .features-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-cyan), #00d4e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tech Stack */
+        .tech-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .tech-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--accent-cyan);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .tech-item:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            transform: translateY(-3px);
+            color: var(--accent-cyan);
+        }
+
+        /* Results */
+        .results-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .results-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-cyan), #00d4e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--bg-card), rgba(0, 240, 255, 0.05));
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .result-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-cyan), #00d4e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        /* Scroll Reveal Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .challenge-section,
+            .features-section,
+            .tech-section,
+            .results-section {
+                padding: 2rem 1rem;
+            }
+
+            .browser-content {
+                height: 300px;
+            }
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="nav-logo">ABHISHEK SWARUP</a>
+        <ul class="nav-links">
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="index.html">Back to Home</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="badge">AI Healthcare Platform</div>
+            <h1>Dental Pro</h1>
+            <p>AI-powered dental patient education using Claude AI â explain procedures so patients understand, in 20+ languages.</p>
+            <a href="https://abhishekswarup-bd.github.io/dental-pro/" class="cta-button" target="_blank" rel="noopener noreferrer">View Dental Pro â</a>
+        </section>
+
+        <!-- Screenshot Section -->
+        <section class="screenshot-section scroll-reveal">
+            <div class="browser-frame">
+                <div class="browser-header">
+                    <div class="browser-dot"></div>
+                    <div class="browser-dot"></div>
+                    <div class="browser-dot"></div>
+                    <span class="browser-url">abhishekswarup-bd.github.io/dental-pro</span>
+                </div>
+                <div class="browser-content">
+                    <iframe src="https://abhishekswarup-bd.github.io/dental-pro/" title="Dental Pro Application"></iframe>
+                    <a href="https://abhishekswarup-bd.github.io/dental-pro/" class="browser-overlay" target="_blank" rel="noopener noreferrer">
+                        <span class="overlay-text">â Open Live Demo</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenge Section -->
+        <section class="challenge-section scroll-reveal">
+            <h2>The Challenge</h2>
+            <div class="challenge-text">
+                Dental practices lose case acceptance because patients don't understand what procedures involve. Existing patient education tools cost $400+ per year and offer static, one-size-fits-all content. I built Dental Pro to use Claude AI to generate personalized, multilingual explanations that adapt to each patient's level of understanding â including a kid-friendly mode.
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">ð¤</div>
+                    <h3>AI-Generated Explanations</h3>
+                    <p>Claude AI creates customized, patient-friendly explanations of dental conditions in accessible language.</p>
+                </div>
+
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">ð</div>
+                    <h3>20+ Languages</h3>
+                    <p>Auto-detects patient location and serves content in their language. Manual switching available for multilingual practices.</p>
+                </div>
+
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">ð¶</div>
+                    <h3>Kid-Friendly Mode</h3>
+                    <p>Transforms clinical explanations into fun, non-scary narratives specifically designed for young patients.</p>
+                </div>
+
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">âï¸</div>
+                    <h3>Treatment Comparisons</h3>
+                    <p>Side-by-side comparison of treatment options showing cost, duration, pain level, and longevity.</p>
+                </div>
+
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">ð</div>
+                    <h3>PDF Export</h3>
+                    <p>Generate professional PDF summaries and email education materials directly to patients for take-home review.</p>
+                </div>
+
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">ð±</div>
+                    <h3>Responsive Design</h3>
+                    <p>Works across tablets, smartphones, and desktops without installation. 8 dental categories, 50 conditions covered.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section class="tech-section">
+            <h2>Tech Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item scroll-reveal">Claude AI</div>
+                <div class="tech-item scroll-reveal">20+ Languages</div>
+                <div class="tech-item scroll-reveal">PDF Export</div>
+                <div class="tech-item scroll-reveal">Responsive Web</div>
+                <div class="tech-item scroll-reveal">Patient Education</div>
+                <div class="tech-item scroll-reveal">Multilingual NLP</div>
+                <div class="tech-item scroll-reveal">50 Conditions</div>
+                <div class="tech-item scroll-reveal">8 Categories</div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <h2>Results</h2>
+            <div class="results-grid">
+                <div class="result-card scroll-reveal">
+                    <div class="result-number">50</div>
+                    <div class="result-label">Dental Conditions</div>
+                </div>
+                <div class="result-card scroll-reveal">
+                    <div class="result-number">20+</div>
+                    <div class="result-label">Languages Supported</div>
+                </div>
+                <div class="result-card scroll-reveal">
+                    <div class="result-number">8</div>
+                    <div class="result-label">Categories</div>
+                </div>
+                <div class="result-card scroll-reveal">
+                    <div class="result-number">$0</div>
+                    <div class="result-label">Starter Plan</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Â© 2026 Abhishek Swarup â¢ Revenue Architect & AI Builder</p>
+    </footer>
+
+    <script>
+        // Scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+
+        // Smooth navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Active navigation link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            if (link.href === window.location.href) {
+                link.style.color = 'var(--accent-cyan)';
+            }
+        });
+    </script>
+</body>
+</html>
