@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Model Validation Pipeline â Decision Tree</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0a1a;color:#e0e0f0;min-height:100vh;line-height:1.6}
+
+/* ---- Header ---- */
+.header{text-align:center;padding:3rem 2rem 1.5rem}
+.header h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;background:linear-gradient(135deg,#4a90e2,#9b59b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}
+.header p{color:#8888aa;font-size:.95rem;max-width:700px;margin:0 auto}
+.header .context-badge{display:inline-block;margin-top:1rem;padding:.4rem 1.2rem;border:1px solid #4a4ae0;border-radius:50px;font-size:.75rem;color:#9b9bff;letter-spacing:1px}
+
+/* ---- Container ---- */
+.container{max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem}
+
+/* ---- Stage ---- */
+.stage{margin-bottom:1rem}
+.stage-question{max-width:600px;margin:0 auto 1.5rem;padding:1.2rem 1.8rem;border:2px solid #4a4ae0;border-radius:14px;background:rgba(74,74,224,.08);text-align:center}
+.stage-question .stage-num{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:#7b7bff;margin-bottom:.3rem}
+.stage-question h2{font-size:1.15rem;color:#c0c0ff;font-weight:600}
+
+/* ---- Cards row ---- */
+.cards-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem}
+
+/* ---- Card ---- */
+.card{width:230px;border-radius:14px;padding:1.3rem;position:relative;cursor:default;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px)}
+
+.card.selected{border:2px solid #22c55e;background:rgba(34,197,94,.08)}
+.card.selected:hover{box-shadow:0 8px 30px rgba(34,197,94,.15)}
+.card.rejected{border:2px solid #6b2020;background:rgba(74,32,32,.35);opacity:.78}
+.card.rejected:hover{opacity:1;box-shadow:0 8px 30px rgba(180,40,40,.12)}
+
+.card .card-badge{display:inline-block;padding:.15rem .6rem;border-radius:50px;font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.7rem}
+.card.selected .card-badge{background:rgba(34,197,94,.2);color:#22c55e;border:1px solid rgba(34,197,94,.3)}
+.card.rejected .card-badge{background:rgba(220,50,50,.15);color:#e05555;border:1px solid rgba(220,50,50,.25)}
+
+.card h3{font-size:.95rem;color:#fff;font-weight:700;margin-bottom:.2rem}
+.card .card-meta{font-size:.72rem;color:#8888aa;margin-bottom:.6rem}
+.card .card-role{font-size:.78rem;color:#bbb;margin-bottom:.5rem;line-height:1.5}
+.card.rejected .card-role{color:#cc6666;font-style:italic;font-size:.75rem}
+.card .card-cost{font-size:.7rem;font-weight:600;padding:.2rem .5rem;border-radius:6px;display:inline-block}
+.card.selected .card-cost{background:rgba(34,197,94,.12);color:#22c55e}
+.card.rejected .card-cost{background:rgba(220,50,50,.1);color:#cc6666}
+
+/* ---- Arrow connector ---- */
+.arrow-connector{text-align:center;padding:.8rem 0;color:#4a4ae0;font-size:1.2rem;line-height:1}
+.arrow-connector .line{display:inline-block;width:2px;height:30px;background:linear-gradient(to bottom,#4a4ae0,#2563eb);margin-bottom:.2rem}
+
+/* ---- Final Pipeline ---- */
+.pipeline-section{margin:3rem 0 2.5rem}
+.pipeline-box{border:2px solid #2563eb;border-radius:18px;background:rgba(37,99,235,.06);padding:2rem;text-align:center}
+.pipeline-box h2{font-size:1.2rem;color:#6b9fff;margin-bottom:1.5rem;letter-spacing:1px}
+.pipeline-flow{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.pipeline-node{padding:.7rem 1.2rem;border:2px solid #22c55e;border-radius:10px;background:rgba(34,197,94,.08);font-size:.82rem;font-weight:600;color:#e0e0f0;white-space:nowrap}
+.pipeline-node .node-sub{display:block;font-size:.6rem;color:#8888aa;font-weight:400;margin-top:.15rem}
+.pipeline-arrow{color:#4a90e2;font-size:1.4rem;font-weight:700}
+.pipeline-note{font-size:.78rem;color:#8888aa;font-style:italic;margin-top:1rem;max-width:550px;margin-left:auto;margin-right:auto}
+
+.stats-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.stat-box{padding:.6rem 1.2rem;border:1px solid #2563eb;border-radius:10px;background:rgba(37,99,235,.06);text-align:center;min-width:100px}
+.stat-box .stat-num{font-size:1.3rem;font-weight:800;color:#6b9fff}
+.stat-box .stat-label{font-size:.65rem;color:#8888aa;letter-spacing:1px;text-transform:uppercase}
+
+/* ---- Criteria ---- */
+.criteria-section{margin-top:3rem}
+.criteria-section h2{text-align:center;font-size:1.15rem;color:#d4a84a;margin-bottom:1.5rem;letter-spacing:1px}
+.criteria-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.criteria-card{border:1px solid #a08020;border-radius:14px;background:rgba(160,128,32,.06);padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:1rem;transition:transform .2s}
+.criteria-card:hover{transform:translateY(-3px)}
+.criteria-num{width:32px;height:32px;border-radius:50%;background:rgba(160,128,32,.15);border:1px solid #a08020;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#d4a84a;flex-shrink:0}
+.criteria-text h4{font-size:.85rem;color:#d4a84a;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.5px}
+.criteria-text p{font-size:.78rem;color:#aaa;line-height:1.5}
+
+/* ---- Back link ---- */
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:#6b9fff;text-decoration:none;font-size:.85rem;padding:.5rem 1rem;border:1px solid rgba(107,159,255,.2);border-radius:50px;transition:all .3s;margin-bottom:1rem}
+.back-link:hover{background:rgba(107,159,255,.08);border-color:rgba(107,159,255,.4)}
+
+/* ---- Footer ---- */
+footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid rgba(255,255,255,.06);margin-top:2rem}
+footer p{font-size:.75rem;color:#555;letter-spacing:1px}
+
+/* ---- Tooltip ---- */
+.tooltip{position:fixed;max-width:320px;padding:.8rem 1rem;background:#1a1a2e;border:1px solid #4a4ae0;border-radius:10px;font-size:.78rem;color:#c0c0e0;line-height:1.5;pointer-events:none;z-index:9999;box-shadow:0 8px 30px rgba(0,0,0,.5);opacity:0;transition:opacity .15s}
+.tooltip.visible{opacity:1}
+
+/* ---- Responsive ---- */
+@media(max-width:768px){
+  .cards-row{flex-direction:column;align-items:center}
+  .card{width:90%;max-width:340px}
+  .pipeline-flow{flex-direction:column}
+  .pipeline-arrow{transform:rotate(90deg)}
+  .criteria-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>4-Model Validation Pipeline</h1>
+  <p>How I selected 4 AI models from 10 candidates to build a zero-cost, multi-architecture options trading validation system.</p>
+  <div class="context-badge">CoachingPro.ai &bull; ~$194K tastytrade portfolio &bull; March 2026</div>
+</div>
+
+<div class="container">
+  <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+
+  <!-- ============ STAGE 1 ============ -->
+  <div class="stage">
+    <div class="stage-question">
+      <div class="stage-num">Stage 1 of 4</div>
+      <h2>Which model should design strategy & provide primary analysis?</h2>
+    </div>
+    <div class="cards-row">
+      <div class="card selected" data-tip="Already active in the session â no additional API cost. Anthropic's strongest reasoning model with deep analytical capability and long context window. Perfect for complex multi-leg options strategy design where nuance matters.">
+        <span class="card-badge">&#10003; Selected</span>
+        <h3>Claude Opus</h3>
+        <div class="card-meta">Anthropic &bull; Proprietary Architecture</div>
+        <div class="card-role">Strategy design + primary analysis. Deep reasoning, long context window. Already in session â no extra cost.</div>
+        <span class="card-cost">$0 â already in session</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-connector"><div class="line"></div><br>&#9660;</div>
+
+  <!-- ============ STAGE 2 ============ -->
+  <div class="stage">
+    <div class="stage-question">
+      <div class="stage-num">Stage 2 of 4</div>
+      <h2>Which model should handle financial sentiment scoring?</h2>
+    </div>
+    <div class="cards-row">
+      <div class="card rejected" data-tip="Bloomberg's proprietary 50B parameter financial LLM. Trained on decades of Bloomberg terminal data. However, it's completely locked behind the $30K/year Bloomberg Terminal subscription with no public API access â making it unusable for this pipeline.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>BloombergGPT</h3>
+        <div class="card-meta">Bloomberg &bull; 50B params</div>
+        <div class="card-role">Not public. $30K/yr Terminal only. No API access for external applications.</div>
+        <span class="card-cost">$30K/yr â locked</span>
+      </div>
+      <div class="card rejected" data-tip="Open-source financial LLM from Columbia/NYU researchers. Provides LoRA adapters (7-13B) for financial fine-tuning. However, it requires self-hosting with GPU infrastructure â no hosted API available. Would need to spin up cloud GPUs at significant cost.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>FinGPT native LoRA</h3>
+        <div class="card-meta">Columbia/NYU &bull; 7-13B LoRA</div>
+        <div class="card-role">LoRA adapters only. Needs self-hosting + GPU. No hosted API available.</div>
+        <span class="card-cost">GPU required</span>
+      </div>
+      <div class="card rejected" data-tip="ProsusAI's financial sentiment classifier based on BERT. Only 110M parameters â classification only, not generative. Hard 512 token limit means it can't process the multi-page portfolio context needed for comprehensive trade analysis.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>FinBERT</h3>
+        <div class="card-meta">ProsusAI &bull; 110M params</div>
+        <div class="card-role">Sentiment classification only, not generative. 512 token limit â can't handle portfolio prompts.</div>
+        <span class="card-cost">Too limited</span>
+      </div>
+      <div class="card selected" data-tip="The smart approach: instead of hosting a dedicated financial LLM, run Meta's Llama-3.3-70B on Groq's free tier with a custom financial system prompt that embeds domain expertise. Gets 90% of FinGPT's benefit at 0% of the cost. Handles sentiment scoring (-10 to +10), risk assessment, strategy scoring, and GO/NO-GO verdicts.">
+        <span class="card-badge">&#10003; Selected</span>
+        <h3>FinGPT via Groq</h3>
+        <div class="card-meta">Meta Llama 3.3 70B &bull; Groq Free Tier</div>
+        <div class="card-role">Sentiment scoring (-10 to +10), risk assessment, strategy scoring (1-10), GO/NO-GO verdicts. Custom financial system prompt.</div>
+        <span class="card-cost">$0/month</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-connector"><div class="line"></div><br>&#9660;</div>
+
+  <!-- ============ STAGE 3 ============ -->
+  <div class="stage">
+    <div class="stage-question">
+      <div class="stage-num">Stage 3 of 4</div>
+      <h2>Which model should perform quantitative pricing analysis?</h2>
+    </div>
+    <div class="cards-row">
+      <div class="card rejected" data-tip="From the PIXIU Project â a 7B parameter financial LLM. At 10x smaller than Llama-3.3-70B already in the pipeline, it would be a significant downgrade. Not available on Groq. Adding a weaker model provides no additional validation value.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>FinMA</h3>
+        <div class="card-meta">PIXIU Project &bull; 7B params</div>
+        <div class="card-role">10x smaller than Llama-3.3-70B. Not on Groq. Would be a clear downgrade.</div>
+        <span class="card-cost">Downgrade</span>
+      </div>
+      <div class="card rejected" data-tip="Open-source financial LLM at 8B parameters. Smaller than the existing models in the pipeline. Doesn't provide a meaningful edge in capability or perspective â would just add latency without improving validation quality.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>FinLlama</h3>
+        <div class="card-meta">Open Source &bull; 8B params</div>
+        <div class="card-role">Only 8B params. Smaller than existing models. No meaningful edge added.</div>
+        <span class="card-cost">Too small</span>
+      </div>
+      <div class="card rejected" data-tip="LLaMA-based financial model from Hong Kong University. Strong capabilities but carries a non-commercial license â research use only. Can't legally use it for live trading decisions on a real portfolio. License restriction is a hard blocker.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>InvestLM</h3>
+        <div class="card-meta">HKU &bull; LLaMA-based</div>
+        <div class="card-role">Non-commercial license. Research only. Can't use for live trading decisions.</div>
+        <span class="card-cost">License blocked</span>
+      </div>
+      <div class="card rejected" data-tip="Databricks' 132B Mixture-of-Experts model. Impressive architecture but not available on Groq â would require Databricks infrastructure. Overkill for the quantitative validation role and adds significant infrastructure complexity.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>DBRX</h3>
+        <div class="card-meta">Databricks &bull; 132B MoE</div>
+        <div class="card-role">Not on Groq. Needs Databricks infra. Overkill for this role.</div>
+        <span class="card-cost">Wrong infra</span>
+      </div>
+      <div class="card selected" data-tip="Alibaba's Qwen3-32B on Groq's free tier. The key differentiator: trained on non-Western financial data, providing a genuinely different perspective from the Western-trained models. Strong at quantitative analysis, pricing checks, position sizing, and mathematical verification. Different architecture = different biases = better validation.">
+        <span class="card-badge">&#10003; Selected</span>
+        <h3>Qwen3-32B</h3>
+        <div class="card-meta">Alibaba &bull; Groq Free Tier</div>
+        <div class="card-role">Quantitative analysis, pricing checks, position sizing, math verification. Non-Western training data provides unique perspective.</div>
+        <span class="card-cost">$0/month</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-connector"><div class="line"></div><br>&#9660;</div>
+
+  <!-- ============ STAGE 4 ============ -->
+  <div class="stage">
+    <div class="stage-question">
+      <div class="stage-num">Stage 4 of 4</div>
+      <h2>Which model should serve as the final cross-validator?</h2>
+    </div>
+    <div class="cards-row">
+      <div class="card rejected" data-tip="OpenAI's flagship model. Excellent capabilities but requires a paid API with significant per-token costs. No free tier available for this use case. Already have 3 strong models â adding a paid 4th doesn't justify the ongoing cost for a validation-only role.">
+        <span class="card-badge">&#10007; Rejected</span>
+        <h3>GPT-4o</h3>
+        <div class="card-meta">OpenAI &bull; Paid API</div>
+        <div class="card-role">Paid API ($$$). No free tier for this use. Already have 3 strong models.</div>
+        <span class="card-cost">$$$ per month</span>
+      </div>
+      <div class="card selected" data-tip="Google's Gemini 2.5 Flash on the free tier. Fast, capable, and brings a 4th completely different architecture. Serves as the final arbiter: sees all 3 prior model outputs and cross-checks for consensus or flags disagreements. The 'tie-breaker' that ensures no single model's bias drives trading decisions.">
+        <span class="card-badge">&#10003; Selected</span>
+        <h3>Gemini 2.5 Flash</h3>
+        <div class="card-meta">Google &bull; Free Tier</div>
+        <div class="card-role">Final cross-validation. Sees all 3 prior model outputs. Cross-checks for consensus or flags disagreements.</div>
+        <span class="card-cost">$0/month</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-connector"><div class="line"></div><br>&#9660;</div>
+
+  <!-- ============ FINAL PIPELINE ============ -->
+  <div class="pipeline-section">
+    <div class="pipeline-box">
+      <h2>&#9889; FINAL VALIDATION PIPELINE</h2>
+      <div class="pipeline-flow">
+        <div class="pipeline-node">Claude Opus<span class="node-sub">Strategy + Analysis</span></div>
+        <span class="pipeline-arrow">&#10148;</span>
+        <div class="pipeline-node">FinGPT (Llama 3.3 70B)<span class="node-sub">Sentiment Scoring</span></div>
+        <span class="pipeline-arrow">&#10148;</span>
+        <div class="pipeline-node">Qwen3-32B<span class="node-sub">Quant Analysis</span></div>
+        <span class="pipeline-arrow">&#10148;</span>
+        <div class="pipeline-node">Gemini 2.5 Flash<span class="node-sub">Cross-Validation</span></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-label">Models</div></div>
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-label">Architectures</div></div>
+        <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Providers</div></div>
+        <div class="stat-box"><div class="stat-num">$0</div><div class="stat-label">Monthly Cost</div></div>
+        <div class="stat-box"><div class="stat-num">10</div><div class="stat-label">Evaluated</div></div>
+      </div>
+      <p class="pipeline-note">Each model sees prior outputs &bull; All must show GO or CONDITIONAL GO to proceed</p>
+    </div>
+  </div>
+
+  <!-- ============ CRITERIA ============ -->
+  <div class="criteria-section">
+    <h2>&#127942; Selection Criteria</h2>
+    <div class="criteria-grid">
+      <div class="criteria-card">
+        <div class="criteria-num">1</div>
+        <div class="criteria-text">
+          <h4>Free</h4>
+          <p>Must run on free API tiers. Zero monthly cost. Sustainable for ongoing use without budget constraints.</p>
+        </div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-num">2</div>
+        <div class="criteria-text">
+          <h4>Different Architectures</h4>
+          <p>Each model must be a distinct "brain" â different training data, different biases, different failure modes.</p>
+        </div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-num">3</div>
+        <div class="criteria-text">
+          <h4>Different Strengths</h4>
+          <p>Reasoning / Sentiment / Quant / Validation â each model fills a unique, non-overlapping role in the pipeline.</p>
+        </div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-num">4</div>
+        <div class="criteria-text">
+          <h4>API-Callable</h4>
+          <p>Must be accessible via API. No self-hosting, no GPU provisioning, no infrastructure overhead required.</p>
+        </div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-num">5</div>
+        <div class="criteria-text">
+          <h4>No Downgrades</h4>
+          <p>Reject any model smaller or weaker than what's already in the pipeline. Every addition must raise the bar.</p>
+        </div>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-num">6</div>
+        <div class="criteria-text">
+          <h4>Cascading Validation</h4>
+          <p>Each model sees prior outputs. Gemini cross-checks all three. Disagreements trigger human review.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>4-Model Validation Pipeline &mdash; Built by Abi & Claude &mdash; March 2026</p>
+</footer>
+
+<!-- ---- Tooltip ---- -->
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const tooltip = document.getElementById('tooltip');
+const cards = document.querySelectorAll('.card[data-tip]');
+
+cards.forEach(card => {
+  card.addEventListener('mouseenter', e => {
+    tooltip.textContent = card.getAttribute('data-tip');
+    tooltip.classList.add('visible');
+  });
+  card.addEventListener('mousemove', e => {
+    const x = e.clientX + 15;
+    const y = e.clientY + 15;
+    const r = tooltip.getBoundingClientRect();
+    const maxX = window.innerWidth - r.width - 20;
+    const maxY = window.innerHeight - r.height - 20;
+    tooltip.style.left = Math.min(x, maxX) + 'px';
+    tooltip.style.top = Math.min(y, maxY) + 'px';
+  });
+  card.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('visible');
+  });
+});
+</script>
+</body>
+</html>
