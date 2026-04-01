@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Portfolio â Abhishek Swarup</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--cyan:#00f0ff;--magenta:#ff00e5;--gold:#ffd700;--dark:#06060e;--glass:rgba(12,12,26,.65);--border:rgba(0,240,255,.12);--grad-cyan:linear-gradient(135deg,#00f0ff,#0080ff)}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:#e0e0e0;overflow-x:hidden;line-height:1.6}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,240,255,.008) 2px,rgba(0,240,255,.008) 4px);pointer-events:none;z-index:9999}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;backdrop-filter:blur(20px);background:rgba(6,6,14,.82);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1rem;background:var(--grad-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;text-decoration:none}
+nav .nav-links{display:flex;gap:1.5rem;list-style:none}
+nav .nav-links a{color:#aaa;text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;transition:color .3s}
+nav .nav-links a:hover{color:var(--cyan)}
+
+/* Hero */
+.hero{padding:7rem 2rem 3rem;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(0,240,255,.05),transparent)}
+.hero-inner{position:relative;z-index:1;max-width:750px;margin:0 auto}
+.hero-badge{display:inline-block;padding:.3rem 1rem;border:1px solid var(--cyan);border-radius:50px;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.8rem}
+.hero p{color:#999;font-size:1rem;max-width:600px;margin:0 auto}
+
+/* Stats bar */
+.stats-bar{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:2rem;max-width:800px;margin:0 auto}
+.stat{text-align:center}
+.stat .num{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:.68rem;color:#888;letter-spacing:2px;text-transform:uppercase}
+
+/* Project grid */
+.projects{max-width:1100px;margin:0 auto;padding:2rem 2rem 4rem}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+
+.project-card{background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .5s;position:relative;text-decoration:none;display:block;color:inherit}
+.project-card:hover{transform:translateY(-8px);border-color:rgba(0,240,255,.4);box-shadow:0 20px 60px rgba(0,240,255,.08)}
+
+.card-preview{position:relative;width:100%;padding-top:56.25%;overflow:hidden}
+.card-preview iframe{position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;transform:scale(1.01)}
+.card-preview .preview-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0a2a,#1a1a3a);font-family:'Orbitron',sans-serif;font-size:1.2rem;color:#555}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,14,.95) 0%,rgba(6,6,14,.3) 50%,transparent 100%);display:flex;align-items:flex-end;padding:1.5rem}
+
+.card-content{padding:1.5rem}
+.card-type{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:.4rem}
+.card-content h3{font-family:'Orbitron',sans-serif;font-size:1rem;color:#fff;margin-bottom:.4rem}
+.card-content p{font-size:.82rem;color:#999;margin-bottom:1rem;line-height:1.6}
+.card-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.card-tags span{font-size:.6rem;padding:.2rem .5rem;background:rgba(0,240,255,.06);border:1px solid rgba(0,240,255,.12);border-radius:4px;color:var(--cyan);font-family:'JetBrains Mono',monospace}
+.card-arrow{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;border-radius:50%;background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.2);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:.9rem;transition:all .3s}
+.project-card:hover .card-arrow{background:rgba(0,240,255,.15);box-shadow:0 0 20px rgba(0,240,255,.2)}
+
+/* Decision tree special card */
+.project-card.decision-tree{border-color:rgba(255,215,0,.15)}
+.project-card.decision-tree:hover{border-color:rgba(255,215,0,.4);box-shadow:0 20px 60px rgba(255,215,0,.06)}
+.project-card.decision-tree .card-type{color:var(--gold)}
+.project-card.decision-tree .card-tags span{background:rgba(255,215,0,.06);border-color:rgba(255,215,0,.12);color:var(--gold)}
+.project-card.decision-tree .card-arrow{background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.2);color:var(--gold)}
+
+/* Footer */
+footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--border)}
+footer p{font-size:.72rem;color:#444;letter-spacing:1px}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .projects-grid{grid-template-columns:1fr}
+  .stats-bar{gap:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">ABHISHEK SWARUP</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Not Just Selling AI â Building It</div>
+    <h1>AI Product Portfolio</h1>
+    <p>Every product below was architected, built, and shipped by me using LLMs as my primary collaborator. Click any project to see the full case study.</p>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat"><div class="num">6+</div><div class="label">Products Built</div></div>
+  <div class="stat"><div class="num">4</div><div class="label">Architectures</div></div>
+  <div class="stat"><div class="num">$0</div><div class="label">Monthly Cost</div></div>
+  <div class="stat"><div class="num">10</div><div class="label">Models Evaluated</div></div>
+</div>
+
+<section class="projects">
+  <div class="projects-grid">
+
+    <a href="project-sales-command-center.html" class="project-card reveal">
+      <div class="card-preview">
+        <iframe src="https://drooid-ceo-dashboard.abhishekswarup-bd.workers.dev" loading="lazy" sandbox></iframe>
+      </div>
+      <div class="card-arrow">&nearr;</div>
+      <div class="card-content">
+        <div class="card-type">AI Sales Engine</div>
+        <h3>CEO Sales Command Center</h3>
+        <p>Real-time CEO dashboard with 33 autonomous AI agents orchestrating the full sales pipeline from prospecting to outreach.</p>
+        <div class="card-tags">
+          <span>Cloudflare Workers</span><span>Supabase</span><span>33 Agents</span><span>Agentic AI</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="project-coachingpro.html" class="project-card reveal">
+      <div class="card-preview">
+        <iframe src="https://coachingpro.ai" loading="lazy" sandbox></iframe>
+      </div>
+      <div class="card-arrow">&nearr;</div>
+      <div class="card-content">
+        <div class="card-type">AI Trading Platform</div>
+        <h3>CoachingPro.ai</h3>
+        <p>Full-stack AI options trading platform with voice coaching, Greeks dashboard, IV analysis, and 172 learning modules.</p>
+        <div class="card-tags">
+          <span>Flutter</span><span>Claude AI</span><span>TastyTrade</span><span>iOS App</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="project-career-launcher.html" class="project-card reveal">
+      <div class="card-preview">
+        <iframe src="https://abhishekswarup-bd.github.io/CL-Agent/testmagicks-website.html#home" loading="lazy" sandbox></iframe>
+      </div>
+      <div class="card-arrow">&nearr;</div>
+      <div class="card-content">
+        <div class="card-type">EdTech AI Platform</div>
+        <h3>Career Launcher AI</h3>
+        <p>AI-powered mock exam generation for 25+ Indian competitive exams with multi-LLM engine and QC validation.</p>
+        <div class="card-tags">
+          <span>Claude</span><span>Gemini</span><span>Groq</span><span>25+ Exams</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="project-dental-pro.html" class="project-card reveal">
+      <div class="card-preview">
+        <iframe src="https://abhishekswarup-bd.github.io/dental-pro/" loading="lazy" sandbox></iframe>
+      </div>
+      <div class="card-arrow">&nearr;</div>
+      <div class="card-content">
+        <div class="card-type">AI Healthcare Platform</div>
+        <h3>Dental Pro</h3>
+        <p>AI-powered patient education using Claude AI â explains dental procedures in 20+ languages with kid-friendly mode.</p>
+        <div class="card-tags">
+          <span>Claude AI</span><span>20+ Languages</span><span>PDF Export</span><span>50 Conditions</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="project-etf-junction.html" class="project-card reveal">
+      <div class="card-preview">
+        <div class="preview-placeholder">ETF Junction &bull; 9,500+ ETFs</div>
+      </div>
+      <div class="card-arrow">&nearr;</div>
+      <div class="card-content">
+        <div class="card-type">Fintech AI &bull; CNBC-TV18 Featured</div>
+        <h3>ETF Junction</h3>
+        <p>AI capital markets intelligence covering 9,500+ global ETFs with five analysis engines. Featured on CNBC-TV18.</p>
+        <div class="card-tags">
+          <span>Gemini AI</span><span>9,500+ ETFs</span><span>5 Engines</span><span>CNBC-TV18</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="model_selection_decision_tree.html" class="project-card decision-tree reveal">
+      <div class="card-preview">
+        <div class="preview-placeholder" style="background:linear-gradient(135deg,#0a0a2a,#1a0a2a);">4-Model AI Pipeline &bull; Decision Tree</div>
+      </div>
+      <div class="card-arrow">&nearr;</div>
+      <div class="card-content">
+        <div class="card-type">Case Study &bull; Decision Tree</div>
+        <h3>4-Model Validation Pipeline</h3>
+        <p>Interactive decision tree: how I evaluated 10 AI models to build a zero-cost, multi-architecture validation pipeline.</p>
+        <div class="card-tags">
+          <span>Claude Opus</span><span>Llama 3.3 70B</span><span>Qwen3-32B</span><span>Gemini Flash</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Abhishek Swarup &bull; Revenue Architect & AI Builder &bull; Chicago Metropolitan</p>
+</footer>
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:.1});
+reveals.forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
