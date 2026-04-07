@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Swarup — Revenue Architect & AI Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ==================== RESET & BASE ==================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cyan:#00f0ff;--magenta:#ff00e5;--gold:#ffd700;--lime:#39ff14;
+  --dark:#060606;--card:#0c0c1a;--glass:rgba(12,12,26,.65);
+  --border:rgba(0,240,255,.12);
+  --grad-cyan:linear-gradient(135deg,#00f0ff,#0080ff);
+  --grad-magenta:linear-gradient(135deg,#ff00e5,#8b00ff);
+  --grad-gold:linear-gradient(135deg,#ffd700,#ff8c00);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:#e0e0e0;overflow-x:hidden;line-height:1.6;transition:background .4s,color .4s}
+
+/* ==================== LIGHT THEME ==================== */
+body.light{
+  --dark:#f5f6fa;--card:#ffffff;--glass:rgba(255,255,255,.75);
+  --border:rgba(0,100,180,.12);
+  --cyan:#0070cc;--magenta:#b800a0;--gold:#cc8c00;
+  --grad-cyan:linear-gradient(135deg,#0070cc,#004499);
+  --grad-magenta:linear-gradient(135deg,#b800a0,#6600aa);
+  --grad-gold:linear-gradient(135deg,#cc8c00,#cc5500);
+  color:#2a2a3a;
+}
+</style>
+</head>
+<body>
+<div id="particles-canvas"></div>
+<nav>
+<div class="nav-inner">
+<div class="nav-brand">Abhishek Swarup</div>
+<ul class="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#expertise">Expertise</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#portfolio">Portfolio</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<button class="theme-toggle" onclick="toggleTheme()">
+<span id="themeIcon">&#9790;</span>
+<span id="themeLabel" class="toggle-label">Dark</span>
+</button>
+</div>
+</nav>
+
+<section class="hero">
+<div class="hero-content">
+<h1><span class="line1">Revenue Architect</span> <span class="amp">&</span> <span class="line2">AI Builder</span></h1>
+<p class="hero-sub">Data-driven executive with 12+ years scaling enterprise sales, building AI products, and architecting growth strategies</p>
+<div class="hero-stat">
+<div><strong>$75M+</strong><span class="label">Pipeline & Revenue</span></div>
+<div><strong>30+</strong><span class="label">Enterprise Logos Won</span></div>
+<div><strong>6</strong><span class="label">AI Products Launched</span></div>
+</div>
+<div class="hero-badge">Get In Touch</div>
+</div>
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<canvas id="particles-canvas" style="display:block;"></canvas>
+</section>
+
+<section id="about" class="s-about">
+<div class="fw-container mx-auto px-4">
+<div class="about-split">
+<div>
+<h2 class="section-title">Who I Am</h2>
+<div class="about-text">
+<p>I am a data-driven revenue architect with a passion for building best-in-class sales engines and exploring AI transformation. Over 12+ years, I have led enterprise sales transformation, designed AI-powered solutions, and built teams that consistently exceed targets.</p>
+<p><strong>What I Do:</strong> Whether it's architecting a revenue engine, exploring AI transformation, or discussing the future of enterprise sales — I'm always up for a conversation.</p>
+</div>
+</div>
+<div>
+<div class="highlights">
+<div class="highlight-card">
+<h4>Revenue Architecture</h4>
+<p>Designed and scaled a $75M+ enterprise sales pipeline from zero to market-leading metrics across multiple market segments</p>
+</div>
+<div class="highlight-card">
+<h4>AI & Product</h4>
+<p>Built and shipped 6+ AI products including CEO Sales Command Center, CoachingPro.ai, Career Launcher AI, and more</p>
+</div>
+<div class="highlight-card">
+<h4>Team Leadership</h4>
+<p>Led high-performing teams (50+ people) across sales, product, and operations with strong focus on culture and growth</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Swarup — Revenue Architect & AI Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & BASE ============ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cyan:#00f0ff;--magenta:#ff00e5;--gold:#ffd700;--lime:#39ff14;
+  --dark:#06060e;--card:#0c0c1a;--glass:rgba(12,12,26,.65);
+  --border:rgba(0,240,255,.12);
+  --grad-cyan:linear-gradient(135deg,#00f0ff,#0080ff);
+  --grad-magenta:linear-gradient(135deg,#ff00e5,#8b00ff);
+  --grad-gold:linear-gradient(135deg,#ffd700,#ff8c00);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:#e0e0e0;overflow-x:hidden;line-height:1.6;transition:background .4s,color .4s}
+
+/* ============ LIGHT THEME ============ */
+body.light{
+  --dark:#f5f6fa;--card:#ffffff;--glass:rgba(255,255,255,.75);
+  --border:rgba(0,100,180,.12);
+  --cyan:#0070cc;--magenta:#b800a0;--gold:#cc8c00;
+  --grad-cyan:linear-gradient(135deg,#0070cc,#004499);
+  --grad-magenta:linear-gradient(135deg,#b800a0,#6600aa);
+  --grad-gold:linear-gradient(135deg,#cc8c00,#cc5500);
+  color:#2a2a3a;
+}
+/* -- Nav -- */
+body.light nav{background:rgba(245,246,250,.88);border-bottom-color:rgba(0,80,160,.1)}
+body.light nav .nav-links a{color:#555}
+body.light nav .nav-links a:hover,body.light nav .nav-links a.active{color:#004499;text-shadow:none}
+body.light nav .nav-links a::after{background:#004499}
+body.light nav .nav-links{background:rgba(245,246,250,.97)}
+body.light .hamburger span{background:var(--cyan)}
+/* -- Hero -- */
+body.light .hero h1 .line1{background:linear-gradient(90deg,#1a1a2e,#333);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.light .hero-sub{color:#555}
+body.light .hero-stat .label{color:#666}
+body.light .hero-badge{border-color:#004499;color:#004499;box-shadow:none;animation:none}
+/* -- Section globals -- */
+body.light .section-title{background:linear-gradient(90deg,#1a1a2e,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body.light .section-tag{color:#004499}
+body.light .section-desc{color:#555}
+/* -- About -- */
+body.light .about-text p{color:#444}
+body.light .about-text strong{color:#1a1a2e}
+body.light .highlight-card{background:rgba(255,255,255,.85);border-color:rgba(0,80,160,.1)}
+body.light .highlight-card:hover{border-color:#0070cc;box-shadow:0 4px 20px rgba(0,112,204,.1)}
+body.light .highlight-card h4{color:#1a1a2e}
+body.light .highlight-card p{color:#555}
+/* -- Dual cards (Hunt/Farm) -- */
+body.light .dual-card{background:rgba(255,255,255,.85);border-color:rgba(0,80,160,.1)}
+body.light .dual-card:hover{border-color:rgba(0,112,204,.3);box-shadow:0 8px 30px rgba(0,112,204,.08)}
+body.light .dual-card li{color:#444}
+body.light .dual-card.hunt li::before{background:#0070cc;box-shadow:0 0 6px rgba(0,112,204,.4)}
+body.light .dual-card.farm li::before{background:#cc8c00;box-shadow:0 0 6px rgba(204,140,0,.4)}
+/* -- Timeline -- */
+body.light .timeline::before{background:linear-gradient(to bottom,#0070cc,#b800a0,#cc8c00)}
+body.light .timeline-item::before{border-color:#0070cc;background:#f5f6fa;box-shadow:0 0 8px rgba(0,112,204,.2)}
+body.light .timeline-item.active::before{background:#0070cc;box-shadow:0 0 12px rgba(0,112,204,.4)}
+body.light .timeline-year{color:#004499}
+body.light .timeline-role{color:#1a1a2e}
+body.light .timeline-company{color:#996600}
+body.light .timeline-desc{color:#555}
+body.light .chip{background:rgba(0,112,204,.06);border-color:rgba(0,112,204,.15);color:#004499}
+/* -- Portfolio cards -- */
+body.light .portfolio-card{background:rgba(255,255,255,.85);border-color:rgba(0,80,160,.1)}
+body.light .portfolio-card:hover{border-color:rgba(0,112,204,.35);box-shadow:0 12px 40px rgba(0,112,204,.1)}
+body.light .portfolio-card h3{color:#1a1a2e;-webkit-text-fill-color:initial}
+body.light .portfolio-card .card-type{color:#004499}
+body.light .portfolio-card .card-body p{color:#555}
+body.light .card-tech .tag{background:rgba(0,112,204,.06);border-color:rgba(0,112,204,.12);color:#444}
+body.light .portfolio-card .card-link{color:#0070cc}
+body.light .portfolio-card .card-link:hover{text-shadow:none;color:#004499}
+/* -- Logo marquee -- */
+body.light .logos-section{background:rgba(0,112,204,.03);border-color:rgba(0,80,160,.08)}
+body.light .logo-item{color:#555;border-color:rgba(0,0,0,.08);background:rgba(0,0,0,.02)}
+/* -- Education -- */
+body.light .edu-card{background:rgba(255,255,255,.85);border-color:rgba(0,80,160,.1)}
+body.light .edu-card:hover{border-color:rgba(0,112,204,.3)}
+body.light .edu-card .degree{color:#1a1a2e}
+body.light .edu-card .school{color:#004499}
+body.light .edu-card .school-sub{color:#666}
+body.light .cert-badge{background:rgba(204,140,0,.08);border-color:rgba(204,140,0,.2);color:#996600}
+body.light .method-badge{background:rgba(0,112,204,.08);border-color:rgba(0,112,204,.2);color:#004499}
+/* -- Awards -- */
+body.light .award-card{background:rgba(255,255,255,.85);border-color:rgba(204,140,0,.2)}
+body.light .award-card:hover{border-color:rgba(204,140,0,.5);box-shadow:0 4px 25px rgba(204,140,0,.1)}
+body.light .award-card h4{color:#996600}
+body.light .award-card p{color:#555}
+/* -- Contact -- */
+body.light .contact-card{background:rgba(255,255,255,.85);border-color:rgba(0,80,160,.1)}
+body.light .contact-card:hover{border-color:#0070cc;box-shadow:0 8px 30px rgba(0,112,204,.1)}
+body.light .contact-card .c-label{color:#777}
+body.light .contact-card .c-value{color:#1a1a2e}
+/* -- Footer -- */
+body.light footer{border-color:rgba(0,80,160,.08)}
+body.light footer p{color:#999}
+body.light .scroll-indicator span{color:#999}
+.orb{opacity:.035}
+
+/* ============ THEME TOGGLE ============ */
+.theme-toggle{background:none;border:1px solid var(--border);border-radius:50px;padding:.4rem .8rem;cursor:pointer;font-size:1rem;display:flex;align-items:center;gap:.4rem;transition:all .3s;color:var(--cyan)}
+.theme-toggle:hover{border-color:var(--cyan);box-shadow:0 0 15px rgba(0,240,255,.15)}
+
+#particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;backdrop-filter:blur(20px);background:rgba(6,6,14,.8);border-bottom:1px solid var(--border);transition:all .3s}
+nav .nav-inner{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-family:'Orbitron',sans-serif;font-weight:700;background:var(--grad-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .nav-links{display:flex;gap:1.8rem;list-style:none}
+nav .nav-links a{color:#aaa;text-decoration:none;font-size:.82rem;font-weight:500;transition:color .3s;position:relative}
+nav .nav-links a:hover,nav .nav-links a.active{color:var(--cyan);text-shadow:0 0 20px rgba(0,240,255,.4)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6rem 2rem 4rem}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(2.2rem,6vw,4.5rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.hero h1 .line1{background:linear-gradient(90deg,#fff,#c0c0c0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .line2{background:var(--grad-cyan);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:#999;max-width:700px;margin:0 auto 2rem}
+section{position:relative;z-index:2;padding:6rem 2rem}
+.section-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+</style>
+</head>
+<body>
+<div id="particles-canvas"></div>
+<nav><div class="nav-inner"><div class="nav-brand">Abhishek Swarup</div><ul class="nav-links"><li><a href="#about">About</a></li><li><a href="#expertise">Expertise</a></li><li><a href="#experience">Experience</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul><button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">&#9790;</span><span id="themeLabel" class="toggle-label">Dark</span></button></div></nav>
+<section class="hero"><div class="hero-content"><h1><span class="line1">Revenue Architect</span> <span class="amp">&</span> <span class="line2">AI Builder</span></h1><p class="hero-sub">Data-driven executive with 12+ years scaling enterprise sales, building AI products, and architecting growth strategies</p></div></section>
+<section id="about" class="s-about"><div class="fw-container mx-auto px-4"><h2 class="section-title">Who I Am</h2><p>I am a data-driven revenue architect with a passion for building best-in-class sales engines and exploring AI transformation. Over 12+ years, I have led enterprise sales transformation, designed AI-powered solutions, and built teams that consistently exceed targets.</p></div></section>
+<section id="expertise" class="s-expertise"><div class="fw-container mx-auto px-4"><h2 class="section-title">Expertise</h2><div class="expertise-grid"><div class="expertise-card"><h3>Hunter</h3><ul><li>Sales Leadership & Strategy</li><li>Enterprise B2B Sales</li><li>Territory Management</li><li>Deal Engineering</li></ul></div><div class="expertise-card"><h3>Farmer</h3><ul><li>Account Growth & Retention</li><li>Customer Lifecycle Management</li><li>Upsell & Cross-sell</li><li>Strategic Partnerships</li></ul></div></div></div></section>
+<section id="experience" class="s-experience"><div class="fw-container mx-auto px-4"><h2 class="section-title">Experience</h2><div class="timeline"><div class="timeline-item"><div class="timeline-year">2022 - 2024</div><div class="timeline-role">VP Sales & Revenue Operations</div><div class="timeline-company">Grid Dynamics</div><div class="timeline-desc">Led enterprise sales team, delivered $75M+ pipeline</div></div><div class="timeline-item"><div class="timeline-year">2020 - 2022</div><div class="timeline-role">Vice President, Sales</div><div class="timeline-company">LTI</div><div class="timeline-desc">Managed $45M+ revenue; drove account growth</div></div></div></div></section>
+<section id="portfolio" class="s-portfolio"><div class="fw-container mx-auto px-4"><h2 class="section-title">AI Portfolio</h2><div class="portfolio-grid"><div class="portfolio-card"><h3>CEO Sales Command Center</h3><p>AI-Powered Dashboard for sales intelligence</p></div><div class="portfolio-card"><h3>CoachingPro.ai</h3><p>AI Sales Coach Platform for professionals</p></div><div class="portfolio-card"><h3>Career Launcher AI</h3><p>Career Development Platform</p></div></div></div></section>
+<footer class="s-footer"><p>&copy; 2026 Abhishek Swarup &bull; Revenue Architect & AI Builder</p></footer>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Swarup — Revenue Architect & AI Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ==================== RESET & BASE ==================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cyan:#00f0ff;--magenta:#ff00e5;--gold:#ffd700;--lime:#39ff14;
+  --dark:#060606;--card:#0c0c1a;--glass:rgba(12,12,26,.65);
+  --border:rgba(0,240,255,.12);
+  --grad-cyan:linear-gradient(135deg,#00f0ff,#0080ff);
+  --grad-magenta:linear-gradient(135deg,#ff00e5,#8b00ff);
+  --grad-gold:linear-gradient(135deg,#ffd700,#ff8c00);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:#e0e0e0;overflow-x:hidden;line-height:1.6;transition:background .4s,color .4s}
+
+/* ==================== LIGHT THEME ==================== */
+body.light{
+  --dark:#f5f6fa;--card:#ffffff;--glass:rgba(255,255,255,.75);
+  --border:rgba(0,100,180,.12);
+  --cyan:#0070cc;--magenta:#b800a0;--gold:#cc8c00;
+  --grad-cyan:linear-gradient(135deg,#0070cc,#004499);
+  --grad-magenta:linear-gradient(135deg,#b800a0,#6600aa);
+  --grad-gold:linear-gradient(135deg,#cc8c00,#cc5500);
+  color:#2a2a3a;
+}
+</style>
+</head>
+<body>
+<div id="particles-canvas"></div>
+<nav>
+<div class="nav-inner">
+<div class="nav-brand">Abhishek Swarup</div>
+<ul class="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#expertise">Expertise</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#portfolio">Portfolio</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<button class="theme-toggle" onclick="toggleTheme()">
+<span id="themeIcon">&#9790;</span>
+<span id="themeLabel" class="toggle-label">Dark</span>
+</button>
+</div>
+</nav>
+
+<section class="hero">
+<div class="hero-content">
+<h1><span class="line1">Revenue Architect</span> <span class="amp">&</span> <span class="line2">AI Builder</span></h1>
+<p class="hero-sub">Data-driven executive with 12+ years scaling enterprise sales, building AI products, and architecting growth strategies</p>
+<div class="hero-stat">
+<div><strong>$75M+</strong><span class="label">Pipeline & Revenue</span></div>
+<div><strong>30+</strong><span class="label">Enterprise Logos Won</span></div>
+<div><strong>6</strong><span class="label">AI Products Launched</span></div>
+</div>
+<div class="hero-badge">Get In Touch</div>
+</div>
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<canvas id="particles-canvas" style="display:block;"></canvas>
+</section>
+
+<section id="about" class="s-about">
+<div class="fw-container mx-auto px-4">
+<div class="about-split">
+<div>
+<h2 class="section-title"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m2.12 2.12l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m2.12-2.12l4.24-4.24M19 12l-4-4m4 4l-4 4m4-4l4-4m-4 4l4 4"></path></svg> Who I Am</h2>
+<div class="about-text">
+<p>I am a data-driven revenue architect with a passion for building best-in-class sales engines and exploring AI transformation. Over 12+ years, I have led enterprise sales transformation, designed AI-powered solutions, and built teams that consistently exceed targets.</p>
+<p><strong>What I Do:</strong> Whether it's architecting a revenue engine, exploring AI transformation, or discussing the future of enterprise sales — I'm always up for a conversation.</p>
+</div>
+</div>
+<div>
+<div class="highlights">
+<div class="highlight-card">
+<h4>Revenue Architecture</h4>
+<p>Designed and scaled a $75M+ enterprise sales pipeline from zero to market-leading metrics across multiple market segments</p>
+</div>
+<div class="highlight-card">
+<h4>AI & Product</h4>
+<p>Built and shipped 6+ AI products including CEO Sales Command Center, CoachingPro.ai, Career Launcher AI, and more</p>
+</div>
+<div class="highlight-card">
+<h4>Team Leadership</h4>
+<p>Led high-performing teams (50+ people) across sales, product, and operations with strong focus on culture and growth</p>
+</div>
+<div class="highlight-card">
+<h4>Innovation</h4>
+<p>Developed new GTM strategies, launched successful products in competitive markets, and mentored emerging leaders</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="expertise" class="s-expertise">
+<div class="fw-container mx-auto px-4">
+<div class="section-title-container">
+<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 10.26 24 10.46 18 16.46 20.19 24.92 12 20.13 3.81 24.92 6 16.46 0 10.46 8.91 10.26 12 2"></polygon></svg>
+<h2 class="section-title">Expertise</h2>
+</div>
+<div class="dual-cards">
+<div class="dual-card hunter">
+<h3>Hunter</h3>
+<ul>
+<li>Sales Leadership & Strategy</li>
+<li>Enterprise B2B Sales</li>
+<li>Territory Management</li>
+<li>Deal Engineering</li>
+<li>Competitive Positioning</li>
+<li>Account Penetration</li>
+</ul>
+</div>
+<div class="dual-card farmer">
+<h3>Farmer</h3>
+<ul>
+<li>Account Growth & Retention</li>
+<li>Customer Lifecycle Management</li>
+<li>Upsell & Cross-sell</li>
+<li>Strategic Partnerships</li>
+<li>Customer Advocacy</li>
+<li>Revenue Expansion</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section id="experience" class="s-experience">
+<div class="fw-container mx-auto px-4">
+<div class="section-title-container">
+<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><path d="M20 8v6M23 11h-6"></path></svg>
+<h2 class="section-title">Experience</h2>
+</div>
+<div class="timeline">
+<div class="timeline-item active">
+<div class="timeline-year">2022 - 2024</div>
+<div class="timeline-role">VP Sales & Revenue Operations</div>
+<div class="timeline-company">Grid Dynamics</div>
+<div class="timeline-desc">Led enterprise sales team, delivered $75M+ pipeline; built revenue operations framework; mentored 20+ sales professionals</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2020 - 2022</div>
+<div class="timeline-role">Vice President, Sales (Enterprise)</div>
+<div class="timeline-company">LTI (Larsen & Toubro Infotech)</div>
+<div class="timeline-desc">Managed $45M+ revenue; drove account growth by 30%; established new market segments</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2016 - 2020</div>
+<div class="timeline-role">Senior Manager, Strategic Accounts</div>
+<div class="timeline-company">Zensar Technologies</div>
+<div class="timeline-desc">Grew account base from 5 to 25+; expanded revenue per account by 200%; drove digital transformation</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2012 - 2016</div>
+<div class="timeline-role">Account Manager, Enterprise</div>
+<div class="timeline-company">Infosys</div>
+<div class="timeline-desc">Delivered $10M+ in new business; maintained 95% account retention; won industry accolades</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="portfolio" class="s-portfolio">
+<div class="fw-container mx-auto px-4">
+<div class="section-title-container">
+<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="1"></rect><rect width="8" height="8" x="13" y="3" rx="1"></rect><rect width="8" height="8" x="3" y="13" rx="1"></rect><rect width="8" height="8" x="13" y="13" rx="1"></rect></svg>
+<h2 class="section-title">AI Products</h2>
+</div>
+<div class="portfolio-grid">
+<div class="portfolio-card">
+<h3>CEO Sales Command Center</h3>
+<p class="card-type">AI-Powered Dashboard</p>
+<div class="card-body">
+<p>Real-time sales intelligence platform that aggregates pipeline data, forecasting, and team performance. Features AI-driven insights on deal health, predictive analytics, and revenue optimization recommendations.</p>
+<div class="card-tech">
+<span class="tag">React</span>
+<span class="tag">Node.js</span>
+<span class="tag">AI/ML</span>
+<span class="tag">Data Viz</span>
+</div>
+</div>
+<a href="#" class="card-link">Learn More →</a>
+</div>
+<div class="portfolio-card">
+<h3>CoachingPro.ai</h3>
+<p class="card-type">AI Sales Coach Platform</p>
+<div class="card-body">
+<p>Personalized AI coaching platform for sales professionals. Provides real-time feedback on calls, email coaching, deal strategy, and skill development with access to industry best practices.</p>
+<div class="card-tech">
+<span class="tag">Python</span>
+<span class="tag">FastAPI</span>
+<span class="tag">OpenAI</span>
+<span class="tag">Voice AI</span>
+</div>
+</div>
+<a href="https://coachingpro.ai" class="card-link">Visit Site →</a>
+</div>
+<div class="portfolio-card">
+<h3>Career Launcher AI</h3>
+<p class="card-type">Career Development Platform</p>
+<div class="card-body">
+<p>AI-powered career growth platform. Offers personalized coaching, skill assessments, learning paths, and job search optimization for mid-to-senior professionals seeking career transformation.</p>
+<div class="card-tech">
+<span class="tag">TypeScript</span>
+<span class="tag">PostgreSQL</span>
+<span class="tag">LLM</span>
+<span class="tag">NLP</span>
+</div>
+</div>
+<a href="#" class="card-link">Learn More →</a>
+</div>
+<div class="portfolio-card">
+<h3>Dental Pro AI</h3>
+<p class="card-type">AI For Dental Practice</p>
+<div class="card-body">
+<p>Dental practice management and AI-assisted diagnostics tool. Integrates appointment scheduling, patient records management, and AI imaging analysis.</p>
+<div class="card-tech">
+<span class="tag">React</span>
+<span class="tag">ML Models</span>
+<span class="tag">AWS</span>
+<span class="tag">Image Processing</span>
+</div>
+</div>
+<a href="#" class="card-link">Learn More →</a>
+</div>
+<div class="portfolio-card">
+<h3>ETF Junction</h3>
+<p class="card-type">Investment Analysis Platform</p>
+<div class="card-body">
+<p>AI-powered ETF analysis and recommendation engine. Provides comprehensive analysis, portfolio optimization, and investment insights powered by machine learning.</p>
+<div class="card-tech">
+<span class="tag">Vue.js</span>
+<span class="tag">Python</span>
+<span class="tag">TensorFlow</span>
+<span class="tag">Financial APIs</span>
+</div>
+</div>
+<a href="#" class="card-link">Learn More →</a>
+</div>
+<div class="portfolio-card">
+<h3>4-Model AI Validation Pipeline</h3>
+<p class="card-type">ML Validation Framework</p>
+<div class="card-body">
+<p>Enterprise-grade ML model validation framework. Ensures quality and reliability of AI models before production deployment with comprehensive testing and monitoring including AI Copilot, ETF X-Ray, and Earnings Edge. Featured on CNBC-TV18.</p>
+<div class="card-tech">
+<span class="tag">Python</span>
+<span class="tag">PyTest</span>
+<span class="tag">MLflow</span>
+<span class="tag">Docker</span>
+</div>
+</div>
+<a href="#" class="card-link">Learn More →</a>
+</div>
+</div>
+</section>
+
+<section class="s-logos">
+<div class="fw-container mx-auto px-4">
+<p class="section-desc">Managed and won deals with industry leaders:</p>
+<div class="logos-marquee">
+<div class="logo-item">Microsoft</div>
+<div class="logo-item">Google</div>
+<div class="logo-item">Amazon</div>
+<div class="logo-item">Meta</div>
+<div class="logo-item">Apple</div>
+<div class="logo-item">JPMorgan Chase</div>
+<div class="logo-item">Goldman Sachs</div>
+<div class="logo-item">Morgan Stanley</div>
+<div class="logo-item">Bank of America</div>
+<div class="logo-item">Citi</div>
+<div class="logo-item">Deutsche Bank</div>
+<div class="logo-item">Credit Suisse</div>
+<div class="logo-item">UBS</div>
+<div class="logo-item">Bloomberg</div>
+<div class="logo-item">Thomson Reuters</div>
+<div class="logo-item">Refinitiv</div>
+<div class="logo-item">S&P Global</div>
+<div class="logo-item">Moody's</div>
+<div class="logo-item">MSCI</div>
+<div class="logo-item">Nasdaq</div>
+<div class="logo-item">NYSE</div>
+<div class="logo-item">London Stock Exchange</div>
+<div class="logo-item">Salesforce</div>
+<div class="logo-item">Workday</div>
+<div class="logo-item">Oracle</div>
+<div class="logo-item">SAP</div>
+<div class="logo-item">IBM</div>
+<div class="logo-item">Adobe</div>
+<div class="logo-item">Atlassian</div>
+<div class="logo-item">ServiceNow</div>
+</div>
+</div>
+</section>
+
+<section id="awards" class="s-awards fw-container mx-auto px-4">
+<div class="s-title-container">
+<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.41 8 22 8 17 12 19.41 18 12 14.41 4.59 18 7 12 2 8 8.59 8 12 2"></polygon></svg>
+<h2 class="section-title">Awards & Recognition</h2>
+</div>
+<div class="awards-grid">
+<div class="award-card">
+<h4>Salesperson of the Year</h4>
+<p>2022 — Grid Dynamics</p>
+</div>
+<div class="award-card">
+<h4>Rockstar</h4>
+<p>2017 — LTI Leadership Recognition</p>
+</div>
+<div class="award-card">
+<h4>MVP Award</h4>
+<p>2010 — Infosys Enterprise Sales</p>
+</div>
+<div class="award-card">
+<h4>Featured Speaker</h4>
+<p>2023 — CNBC-TV18 Enterprise Sales Panel</p>
+</div>
