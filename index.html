@@ -39,7 +39,6 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  cursor: none;
 }
 
 ::-webkit-scrollbar { width: 6px; }
@@ -47,36 +46,8 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
 /* ===== CUSTOM CURSOR ===== */
-#cursor-dot {
-  width: 8px; height: 8px;
-  background: var(--cyan);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transition: transform 0.1s ease;
-  mix-blend-mode: difference;
-}
-#cursor-glow {
-  width: 40px; height: 40px;
-  border: 1.5px solid rgba(0,240,255,0.4);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99998;
-  transition: transform 0.15s ease, width 0.3s, height 0.3s, border-color 0.3s;
-}
-#cursor-spotlight {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(0,240,255,0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99997;
-  transition: transform 0.3s ease;
+#cursor-dot, #cursor-glow, #cursor-spotlight {
+  display: none;
 }
 
 /* ===== SCROLL PROGRESS BAR ===== */
@@ -118,7 +89,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   transition: all 0.3s ease;
-  cursor: none;
+
 }
 .floating-nav a:hover { color: var(--cyan); }
 .floating-nav a .nav-dot {
@@ -166,7 +137,7 @@ body {
   color: var(--cyan);
   letter-spacing: 3px;
   text-decoration: none;
-  cursor: none;
+
 }
 .top-nav .nav-links {
   display: flex;
@@ -180,14 +151,14 @@ body {
   font-size: 0.75rem;
   letter-spacing: 1px;
   transition: color 0.3s;
-  cursor: none;
+
 }
 .top-nav .nav-links a:hover { color: var(--cyan); }
 .hamburger {
   display: none;
   flex-direction: column;
   gap: 5px;
-  cursor: none;
+
   background: none;
   border: none;
   padding: 5px;
@@ -216,7 +187,7 @@ body {
   font-family: var(--font-heading);
   font-size: 1.2rem;
   letter-spacing: 2px;
-  cursor: none;
+
 }
 .mobile-menu .close-btn {
   position: absolute;
@@ -225,7 +196,7 @@ body {
   border: none;
   color: var(--cyan);
   font-size: 2rem;
-  cursor: none;
+
 }
 
 /* ===== SCROLL SNAP CONTAINER ===== */
@@ -461,7 +432,7 @@ main {
   border-radius: 4px;
   text-decoration: none;
   transition: all 0.3s ease;
-  cursor: none;
+
   display: inline-block;
 }
 .btn-primary {
@@ -772,7 +743,7 @@ main {
 .flip-card {
   height: 420px;
   perspective: 1200px;
-  cursor: none;
+
 }
 .flip-card-inner {
   position: relative;
@@ -879,7 +850,7 @@ main {
   overflow: hidden;
   text-decoration: none;
   display: block;
-  cursor: none;
+
 }
 .ai-card::before {
   content: '';
@@ -1039,7 +1010,7 @@ main {
   color: var(--cyan);
   text-decoration: none;
   transition: color 0.3s;
-  cursor: none;
+
 }
 .contact-terminal .terminal-body a:hover {
   color: var(--gold);
@@ -1063,9 +1034,7 @@ main {
   .timeline::before { left: 10px; }
   .timeline-item { padding-left: 20px; }
   .timeline-item::before { left: -26px; }
-  #cursor-dot, #cursor-glow, #cursor-spotlight { display: none; }
-  body { cursor: auto; }
-  .btn-primary, .btn-secondary, a, button { cursor: auto; }
+  /* cursor already default */
 }
 @media (max-width: 480px) {
   .hero-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1184,18 +1153,17 @@ main {
       </div>
       <div class="terminal-body">
         <div class="line"><span class="prompt">abhishek@infosys:~$ </span><span class="cmd">cat career_start.log</span></div>
-        <div class="line"><span class="output">[2001] Joined Infosys Technologies as Software Developer</span></div>
-        <div class="line"><span class="output">[2003] Promoted &rarr; Senior Developer | Building enterprise solutions</span></div>
-        <div class="line"><span class="output">[2005] Promoted &rarr; Project Manager | Leading delivery teams</span></div>
-        <div class="line"><span class="output">[2008] Promoted &rarr; Portfolio Lead | Multi-project orchestration</span></div>
+        <div class="line"><span class="output">[2001] Joined Infosys Limited as Developer</span></div>
+        <div class="line"><span class="output">[2004] Promoted &rarr; Project Manager | Leading delivery teams</span></div>
+        <div class="line"><span class="output">[2007] Promoted &rarr; Portfolio Lead | Multi-project orchestration</span></div>
         <div class="line"><span class="output">[2010] <span class="highlight">&#9733; MVP Award</span> | Outstanding contribution to delivery</span></div>
         <div class="line"><span class="output">[2011] Promoted &rarr; Account Manager | Client P&amp;L ownership</span></div>
         <br>
         <div class="line"><span class="prompt">abhishek@infosys:~$ </span><span class="cmd">ls clients/</span></div>
-        <div class="line"><span class="success">Northwestern_Mutual/  Wellpoint/  MassMutual/</span></div>
+        <div class="line"><span class="success">Northwestern_Mutual/  Wellpoint_(Elevance_Health)/  MassMutual/</span></div>
         <br>
         <div class="line"><span class="prompt">abhishek@infosys:~$ </span><span class="cmd">echo $JOURNEY_SUMMARY</span></div>
-        <div class="line"><span class="output">12 years | Developer &rarr; Account Manager | Insurance &amp; Financial Services</span></div>
+        <div class="line"><span class="output">12 years | Developer &rarr; Project Manager &rarr; Portfolio Lead &rarr; Account Manager | Insurance &amp; Healthcare</span></div>
         <div class="line"><span class="output">Built the foundation: technical depth + client relationships + delivery excellence</span></div>
         <br>
         <div class="line"><span class="prompt">abhishek@infosys:~$ </span><span class="cmd">echo "Ready for the next chapter..."</span></div>
@@ -1213,18 +1181,18 @@ main {
     </div>
     <div class="timeline">
       <div class="timeline-item reveal-left stagger-item">
-        <div class="tl-year">2013 &mdash; 2015</div>
+        <div class="tl-year">2013 &mdash; 2016</div>
         <div class="tl-company">Impetus Technologies</div>
-        <div class="tl-role">Vice President &mdash; Healthcare &amp; Life Sciences</div>
+        <div class="tl-role">Director, Strategic Accounts &mdash; Healthcare</div>
         <div class="tl-desc">
           Built and led the $25M healthcare vertical from the ground up. Spearheaded enterprise engagements with McKesson and other major healthcare players. Transformed a nascent practice into a revenue powerhouse through strategic account planning and relentless execution.
         </div>
         <span class="tl-highlight">$25M HEALTHCARE VERTICAL</span>
       </div>
       <div class="timeline-item reveal-right stagger-item">
-        <div class="tl-year">2015 &mdash; 2019</div>
+        <div class="tl-year">2016 &mdash; 2019</div>
         <div class="tl-company">Grid Dynamics</div>
-        <div class="tl-role">VP of Sales &mdash; Midwest &amp; East</div>
+        <div class="tl-role">Senior Director &mdash; Sales, Marketing &amp; Strategic Alliances</div>
         <div class="tl-desc">
           Pre-IPO. Grew territory from $0 to $30M in annual revenue. Landed flagship logos including Walmart and Kohl's. Built pursuit teams, designed GTM strategies, and established Grid Dynamics as a force in retail digital transformation. This was the crucible that forged a revenue architect.
         </div>
@@ -1244,8 +1212,8 @@ main {
     <div class="builder-grid">
       <div class="builder-card stagger-item" data-tilt>
         <div class="card-year">2019 &mdash; 2021</div>
-        <div class="card-company">LTIMindtree</div>
-        <div class="card-role">Senior Vice President &mdash; Healthcare &amp; Life Sciences</div>
+        <div class="card-company">LTI (now LTIMindtree)</div>
+        <div class="card-role">Principal Director &mdash; Life Sciences</div>
         <div class="card-desc">
           Managed a $30M portfolio spanning Abbott and AbbVie. Delivered consistent growth through deep account mining and strategic partnerships. Earned the fastest promotion in the business unit&apos;s history.
         </div>
@@ -1271,9 +1239,9 @@ main {
         </div>
       </div>
       <div class="builder-card stagger-item" data-tilt>
-        <div class="card-year">2022 &mdash; 2024</div>
+        <div class="card-year">2022 &mdash; 2025</div>
         <div class="card-company">Grid Dynamics (Return)</div>
-        <div class="card-role">VP of Sales &mdash; Enterprise</div>
+        <div class="card-role">Senior Director &mdash; Sales, Customer Success &amp; Revenue Growth</div>
         <div class="card-desc">
           Returned to lead the enterprise sales motion with a $75M P&amp;L. Expanded into Fortune 500 accounts, won Salesperson of the Year 2022, and built scalable go-to-market engines across retail, CPG, and financial services.
         </div>
@@ -1296,7 +1264,7 @@ main {
     </div>
     <div class="architect-content">
       <div class="architect-big-title reveal">ZENSAR TECHNOLOGIES</div>
-      <div class="architect-subtitle reveal">Head of Sales &mdash; Building the Future</div>
+      <div class="architect-subtitle reveal">Head of Sales &mdash; Customer Success &amp; New Business Growth</div>
       <div class="architect-stats">
         <div class="arch-stat stagger-item">
           <span class="arch-num"><span class="counter" data-target="6">0</span></span>
